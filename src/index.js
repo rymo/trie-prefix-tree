@@ -9,12 +9,16 @@ import permutations from './permutations';
 
 const PERMS_MIN_LEN = config.PERMS_MIN_LEN;
 
-export default function(input) {
+export default function(input, dump = null) {
   if(!Array.isArray(input)) {
     throw(`Expected parameter Array, received ${typeof input}`);
   }
 
-  const trie = create([...input]);
+  if(typeof(dump) !== 'object') {
+    throw(`Expected parameter object, received ${typeof dump}`);
+  }
+
+  const trie = dump === null ? create([...input]) : dump;
 
   return {
     /**

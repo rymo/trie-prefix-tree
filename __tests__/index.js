@@ -12,6 +12,17 @@ describe('Trie', () => {
     }
   });
 
+  it('throws an error when the second argument specified is not an object', () => {
+    const input = 'string';
+    const expected = `Expected parameter object, received ${typeof input}`;
+
+    try {
+      trie([], input);
+    } catch(error) {
+      expect(error).toEqual(expected);
+    }
+  });
+
   test('return methods', () => {
     const data = trie(['dog', 'cat']);
 
@@ -82,4 +93,32 @@ describe('Retrieving the RAW Trie tree', () => {
 
     expect(actual).toEqual(expected);
   });
+});
+
+describe('Loading a RAW Trie tree', () => {
+  it('imports a raw stringified Trie', () => {
+    const input = {
+      d: {
+        o: {
+          g: {
+            $: 1,
+            s: {
+              $: 1
+            }
+          },
+          n: {
+            u: {
+              t: {
+                $: 1
+              }
+            }
+          }
+        }
+      }
+    };
+    const actual = trie([], input);
+    const expected = trie(['dog', 'dogs', 'donut']);
+
+    expect(actual.dump()).toEqual(expected.dump());
+  })
 });

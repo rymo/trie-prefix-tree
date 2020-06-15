@@ -6,6 +6,7 @@
   "scripts": {
     "build": "babel --out-dir dist src",
     "prebuild": "rimraf dist",
+    "prepack": "babel --out-dir dist src",
     "lint": "eslint src",
     "report-coverage": "codecov",
     "test": "jest",
